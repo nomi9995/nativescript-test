@@ -4,20 +4,31 @@ import { Dialogs } from '@nativescript/core';
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { StyleSheet } from "react-nativescript";
 import { MainStackParamList } from "./NavigationParamList";
-
+import { requestPermissions,takePicture } from '@nativescript/camera'
 type HomeScreenProps = {
     route: RouteProp<MainStackParamList, "Home">,
     navigation: FrameNavigationProp<MainStackParamList, "Home">,
 }
 
 export function HomeScreen({ navigation }: HomeScreenProps) {
+    React.useEffect(()=>{
+        requestPermissions().then(result=>{
+            console.log(result,"resultt")
+            takePicture().then(_result=>{
+                console.log(_result,"_result")
+            })
+        }).catch(error=>{
+
+        })
+    },[])
+
     return (
         <flexboxLayout style={styles.container}>
             <label
                 className="fas"
                 style={styles.text}
             >
-                &#xf135; Hello World!
+                &#xf135; Hello World!sss
             </label>
             <button
                 style={styles.button}
